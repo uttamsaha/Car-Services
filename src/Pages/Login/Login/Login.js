@@ -6,6 +6,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
+  let errorElement;
   const [
     signInWithEmailAndPassword,
     user,
@@ -16,9 +17,16 @@ const Login = () => {
     const passwordRef = useRef('');
     //redirecting to previous state after login
     const navigate = useNavigate();
-  const location = useLocation();
+    const location = useLocation();
   let from = location.state?.from?.pathname  || '/';
 
+  if (error) {
+    errorElement =  
+      <div>
+        <p className="text-danger">Error: {error?.message}</p>
+      </div>
+    
+  }
     if(user){
       //redirecting after login
       navigate(from, {replace:true});
@@ -43,6 +51,7 @@ const Login = () => {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
+          {errorElement}
           <Button variant="danger" type="submit">
             Login
           </Button>

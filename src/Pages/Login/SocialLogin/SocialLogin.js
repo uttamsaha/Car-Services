@@ -11,17 +11,17 @@ const SocialLogin = () => {
     let errorElement;
     const navigate = useNavigate()
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-    const [signInWithGithub, user, loading, error] = useSignInWithGithub(auth);
-    if (error) {
-        errorElement =  (
+    const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
+    if (error || error1) {
+        errorElement =  
           <div>
-            <p>Error: {error.message}</p>
+            <p className="text-danger">Error: {error?.message} {error1?.message}</p>
           </div>
-        );
+        
       }
       
 
-      if(user){
+      if(user || user1){
           navigate('/home');
       }
 
@@ -42,11 +42,11 @@ const SocialLogin = () => {
                 </button>
                 <button onClick={()=> signInWithGithub()} className="btn btn-warning w-50 d-flex align-items-center justify-content-center mx-auto m-2">
                     <img width={30} src={github} alt="" />
-                    <span className="px-2">Facebook Sign In</span>
+                    <span className="px-2">Github Sign In</span>
                 </button>
                 <button className="btn btn-warning w-50 d-flex align-items-center justify-content-center mx-auto">
                     <img width={30} src={facebook} alt="" />
-                    <span className="px-2">Github Sign In</span>
+                    <span className="px-2">Facebook Sign In</span>
                 </button>
             </div>
 
