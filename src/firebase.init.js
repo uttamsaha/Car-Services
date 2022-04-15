@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey:process.evn.REACT_APP_piKey,
-  authDomain:process.evn.REACT_APP_authDomain,
-  projectId:process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId:process.evn.REACT_APP_appId,
+  apiKey: "AIzaSyB3rJtiNU5Pyi-6RBMORCGsuO8V-07pJpk",
+  authDomain: "genius-car-services-1564c.firebaseapp.com",
+  projectId: "genius-car-services-1564c",
+  storageBucket: "genius-car-services-1564c.appspot.com",
+  messagingSenderId: "170480558586",
+  appId: "1:170480558586:web:3be8c2b6e4622fe7974443"
 };
 
 // Initialize Firebase
