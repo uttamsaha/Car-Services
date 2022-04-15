@@ -5,6 +5,8 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import auth from "../../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { async } from "@firebase/util";
+import Loading from "../../Shared/Loading/Loading";
+
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -19,6 +21,10 @@ const navigate = useNavigate();
 
 const toggleReg = () => {
   navigate('/login');
+}
+
+if(loading || updating){
+  return <Loading></Loading>
 }
 
 
@@ -50,6 +56,7 @@ const handleRegister = async (event) => {
       </form>
       <p className="text-center">Already have an account? <span onClick={toggleReg} className="text-danger">Login</span></p>
       <SocialLogin></SocialLogin>
+      
     </div>
   );
 };
