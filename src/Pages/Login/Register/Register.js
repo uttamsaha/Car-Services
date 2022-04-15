@@ -33,11 +33,13 @@ const handleRegister = event => {
   return (
     <div className="register-form">
       <h2 className="text-center">Please Register</h2>
-      <form onSubmit={handleRegister}>
+      <form onSubmit={handleRegister} className="w-50 mx-auto">
             <input className="form-control my-2" type="text" name="name" id="" required placeholder="Your Name: "/>
             <input className="form-control my-2" type="email" name="email" id="" required placeholder="Email.."/>
             <input className="form-control my-2" type="password" name="password" id="" required placeholder="password.."/>
-            <input className="btn btn-danger" type="submit" value="Register" />
+            <input type="checkbox" name="terms" id="terms"></input>
+            <label htmlFor="terms">Accept Terms & Conditions</label> <br></br>
+            <input className="btn btn-danger w-25 mt-3 mx-auto d-block" type="submit" value="Register" />
 
       </form>
       <p className="text-center">Already have an account? <span onClick={toggleReg} className="text-danger">Login</span></p>

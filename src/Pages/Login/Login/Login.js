@@ -2,8 +2,9 @@ import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import SocialLogin from "../SocialLogin/SocialLogin";
+import { async } from "@firebase/util";
 
 const Login = () => {
   let errorElement;
@@ -13,6 +14,7 @@ const Login = () => {
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
     const emailRef = useRef('');
     const passwordRef = useRef('');
     //redirecting to previous state after login
@@ -37,6 +39,14 @@ const Login = () => {
         const password = passwordRef.current.value;
         signInWithEmailAndPassword(email,password);
     }
+
+    //reset password
+    const resetPassword = async() => {
+      const email = emailRef.current.value;
+      await sendPasswordResetEmail(email);
+      alert('Email Sent');
+
+    }
     return (
       <div className="container w-50 mx-auto mt-5">
         <h2 className="text-danger text-center">Please Login</h2>
@@ -48,15 +58,13 @@ const Login = () => {
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control ref={passwordRef} type="password" placeholder="Password" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
           {errorElement}
-          <Button variant="danger" type="submit">
+          <Button variant="danger" type="submit" className="d-block mx-auto w-25 mb-3">
             Login
           </Button>
         </Form>
         <p>New to Car Service? <Link to="/register" className="text-danger text-decoration-none">Please Register</Link></p>
+        <p>Forget Password? <button className='btn btn-link text-danger pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button> </p>
         <SocialLogin></SocialLogin>
       </div>
     );
