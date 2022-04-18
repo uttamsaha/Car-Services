@@ -43,7 +43,8 @@ const handleRegister = async (event) => {
   
 }
   return (
-    <div className="register-form">
+    <div className="d-flex justify-content-center">
+      <div className="register-form w-50">
       <h2 className="text-center">Please Register</h2>
       <form onSubmit={handleRegister} className="w-50 mx-auto">
             <input className="form-control my-2" type="text" name="name" id="" required placeholder="Your Name: "/>
@@ -57,6 +58,7 @@ const handleRegister = async (event) => {
       <p className="text-center">Already have an account? <span onClick={toggleReg} className="text-danger">Login</span></p>
       <SocialLogin></SocialLogin>
       
+    </div>
     </div>
   );
 };
