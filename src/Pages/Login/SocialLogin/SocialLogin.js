@@ -7,12 +7,14 @@ import {
   useSignInWithGithub,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
 
 const SocialLogin = () => {
   let errorElement;
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location?.state?.from?.pathname || "/";
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
   const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
   if (error || error1) {
@@ -28,8 +30,9 @@ const SocialLogin = () => {
     return <Loading></Loading>;
   }
 
+  //login korle checkout page e niye jabe...
   if (user || user1) {
-    navigate("/home");
+    navigate(from, {replace: true});
   }
 
   return (
